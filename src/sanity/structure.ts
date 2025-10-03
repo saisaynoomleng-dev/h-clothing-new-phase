@@ -11,7 +11,5 @@ export const structure: StructureResolver = (S) =>
       S.divider().title('Store'),
       S.documentTypeListItem('product').title('Products').icon(FaShirt),
       S.documentTypeListItem('brand').title('Brands').icon(SiNike),
-      S.documentTypeListItem('productReview')
-        .title('Product Reviews')
-        .icon(CiChat1),
+      S.documentTypeListItem('review').title('Reviews').icon(CiChat1),
     ]);

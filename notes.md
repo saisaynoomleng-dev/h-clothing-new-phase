@@ -18,3 +18,12 @@
       },`
 
 ---
+
+** Filter and Sort the original products**
+`const dealsOfTheDay = products
+    ? products
+        .filter((product) => product.isDiscounted)
+        .sort((a, b) => (b.discountAmount ?? 0) - (a.discountAmount ?? 0))
+    : products;`
+
+---

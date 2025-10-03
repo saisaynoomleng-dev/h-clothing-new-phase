@@ -46,6 +46,9 @@ export const productType = defineType({
           'bag',
           'hat',
           'watch',
+          'dress',
+          'blazer',
+          'blouse',
         ],
         layout: 'radio',
       },
@@ -64,8 +67,70 @@ export const productType = defineType({
       name: 'reviews',
       title: 'Reviews',
       type: 'array',
-      of: [{ type: 'reference', to: { type: 'productReview' } }],
-      group: 'main',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'name',
+              title: 'User Name',
+              type: 'string',
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'slug',
+              type: 'slug',
+              options: {
+                source: 'name',
+              },
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'reviewDate',
+              title: 'Review Date',
+              type: 'date',
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'title',
+              type: 'string',
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'desc',
+              title: 'Description',
+              type: 'text',
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'rating',
+              title: 'Rating',
+              type: 'number',
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'mainImage',
+              title: 'Profile Pic',
+              type: 'image',
+              options: {
+                hotspot: true,
+              },
+            }),
+            defineField({
+              name: 'isVerified',
+              title: 'Is User Verified?',
+              type: 'boolean',
+              initialValue: false,
+            }),
+          ],
+        }),
+      ],
+    }),
+    defineField({
+      name: 'rating',
+      title: 'Rating',
+      type: 'number',
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'mainImages',
@@ -185,7 +250,7 @@ export const productType = defineType({
     },
     prepare({ name, price, image, instock }) {
       const nameFormatted = name
-        ? `${name.slice(0, 1).toUpperCase()}${name.slice(1, 0)}`
+        ? `${name.slice(0, 1).toUpperCase()}${name.slice(1)}`
         : 'Untitled Product';
 
       const priceFormatted = price ? formatCurrency(price) : 'Price Unlisted';

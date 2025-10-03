@@ -2,9 +2,9 @@ import { CiChat1 } from 'react-icons/ci';
 import { FaUser } from 'react-icons/fa';
 import { defineField, defineType } from 'sanity';
 
-export const productReviewType = defineType({
-  name: 'productReview',
-  title: 'Product Review',
+export const ReviewType = defineType({
+  name: 'review',
+  title: 'Review',
   type: 'document',
   icon: CiChat1,
   fields: [
@@ -23,14 +23,15 @@ export const productReviewType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'reviewDate',
-      title: 'Review Date',
-      type: 'date',
+      name: 'role',
+      title: 'Role',
+      type: 'string',
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'title',
-      type: 'string',
+      name: 'reviewDate',
+      title: 'Review Date',
+      type: 'date',
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -52,12 +53,14 @@ export const productReviewType = defineType({
       options: {
         hotspot: true,
       },
-    }),
-    defineField({
-      name: 'isVerified',
-      title: 'Is User Verified?',
-      type: 'boolean',
-      initialValue: false,
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alternative Text',
+          type: 'string',
+          validation: (rule) => rule.required(),
+        }),
+      ],
     }),
   ],
   preview: {
@@ -66,9 +69,8 @@ export const productReviewType = defineType({
       rating: 'rating',
       date: 'reviewDate',
       image: 'mainImage',
-      isVerified: 'isVerified',
     },
-    prepare({ name, rating, date, image, isVerified }) {
+    prepare({ name, rating, date, image }) {
       const nameFormatted = name
         ? `${name.slice(0, 1).toUpperCase()}${name.slice(1)}`
         : 'Unnamed Profile';
@@ -79,10 +81,9 @@ export const productReviewType = defineType({
             day: '2-digit',
           })
         : 'Unspecified Date';
-      const verification = isVerified ? 'Verified' : 'Not Verified';
 
       return {
-        title: `${nameFormatted} (${verification})`,
+        title: `${nameFormatted}`,
         subtitle: `${rating}Star(s) | ${dateFormatted}`,
         media: image || FaUser,
       };

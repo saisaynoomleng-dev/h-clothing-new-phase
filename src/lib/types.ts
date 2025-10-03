@@ -11,3 +11,8 @@ export type TitleProps = {
   children: React.ReactNode;
   className?: string;
 };
+
+// Marquee
+export type MarqueeProps = {
+  imgURL: string;
+};
