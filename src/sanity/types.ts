@@ -357,6 +357,37 @@ export type ALL_REVIEWS_QUERYResult = Array<{
     alt: string | null;
   } | null;
 }>;
+// Variable: SEARCH_QUERY
+// Query: *[_type == 'product'&& defined(slug.current)&& (  (!defined($query)) ||  name match $query ||  category match $query ||  tag match $query)]|order(name desc){  name,  slug,  price,  category,  mainImages[]{    asset->{url},    alt  },  rating,  isDiscounted,  discountAmount}
+export type SEARCH_QUERYResult = Array<{
+  name: string | null;
+  slug: Slug | null;
+  price: number | null;
+  category:
+    | 'bag'
+    | 'blazer'
+    | 'blouse'
+    | 'bottom'
+    | 'coat'
+    | 'dress'
+    | 'hat'
+    | 'jeans'
+    | 'perfume'
+    | 'shoe'
+    | 't-shirt'
+    | 'top'
+    | 'watch'
+    | null;
+  mainImages: Array<{
+    asset: {
+      url: string | null;
+    } | null;
+    alt: string | null;
+  }> | null;
+  rating: number | null;
+  isDiscounted: boolean | null;
+  discountAmount: number | null;
+}>;
 
 // Query TypeMap
 import '@sanity/client';
@@ -364,5 +395,6 @@ declare module '@sanity/client' {
   interface SanityQueries {
     "*[_type == 'product'\n && defined(slug.current)]\n  | order(_createdAt desc){\n  name,\n  slug,\n  price,\n  category,\n  mainImages[]{\n    asset->{url},\n    alt\n  },\n  rating,\n  isDiscounted,\n  discountAmount\n}": ALL_PRODUCTS_QUERYResult;
     "\n  *[_type == 'review'\n && defined(slug.current)]\n|order(reviewDate desc){\n  name,\n  slug,\n  rating,\n  reviewDate,\n  role,\n  desc,\n  mainImage{\n    asset->{url},\n    alt\n  }\n}": ALL_REVIEWS_QUERYResult;
+    "*[_type == 'product'\n&& defined(slug.current)\n&& (\n  (!defined($query)) ||\n  name match $query ||\n  category match $query ||\n  tag match $query\n)]|order(name desc){\n  name,\n  slug,\n  price,\n  category,\n  mainImages[]{\n    asset->{url},\n    alt\n  },\n  rating,\n  isDiscounted,\n  discountAmount\n}": SEARCH_QUERYResult;
   }
 }

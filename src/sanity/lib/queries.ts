@@ -31,3 +31,24 @@ export const ALL_REVIEWS_QUERY = defineQuery(`
     alt
   }
 }`);
+
+export const SEARCH_QUERY = defineQuery(`*[_type == 'product'
+&& defined(slug.current)
+&& (
+  (!defined($query)) ||
+  name match $query ||
+  category match $query ||
+  tag match $query
+)]|order(name desc){
+  name,
+  slug,
+  price,
+  category,
+  mainImages[]{
+    asset->{url},
+    alt
+  },
+  rating,
+  isDiscounted,
+  discountAmount
+}`);

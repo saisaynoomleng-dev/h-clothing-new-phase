@@ -34,7 +34,7 @@ const ProductCardOne = (
   return (
     <Link
       href={`/shop/${slug?.current}`}
-      className="flex flex-col gap-y-2 min-w-[300px]"
+      className="flex flex-col gap-y-2 max-w-[300px]"
     >
       <div className="relative">
         {urlImage ? (
