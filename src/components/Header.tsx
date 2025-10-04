@@ -11,6 +11,7 @@ import { RxHamburgerMenu } from 'react-icons/rx';
 import { CiHeart, CiShoppingCart, CiUser } from 'react-icons/ci';
 import Form from 'next/form';
 import { Input } from './ui/input';
+import { FaMagnifyingGlass } from 'react-icons/fa6';
 
 const NAV_LINKS = [
   { name: 'home', url: '/' },
@@ -32,14 +33,9 @@ const INFO_LINKS = [
 const Header = () => {
   const pathname = usePathname();
   const [navOpen, setNavOpen] = useState<boolean>(false);
-  const [searchOpen, setSearchOpen] = useState<boolean>(false);
 
   const handleNavBtn = () => {
     setNavOpen((prevOpen) => !prevOpen);
-  };
-
-  const handleSearchBtn = () => {
-    setSearchOpen((prevOpen) => !prevOpen);
   };
 
   return (
@@ -56,7 +52,7 @@ const Header = () => {
       </Link>
 
       {/* search form */}
-      <Form action="/search">
+      <Form action="/search" className="relative">
         <label htmlFor="search" className="sr-only">
           Search Anything
         </label>
@@ -64,8 +60,13 @@ const Header = () => {
           name="query"
           placeholder="Search..."
           id="search"
-          className="w-[70%] focus:w-full transition-all duration-150 ease-in-out"
+          className="focus:w-full transition-all duration-150 ease-in-out"
         />
+        <div className="absolute right-1 top-2 px-2 ">
+          <button type="submit">
+            <FaMagnifyingGlass />
+          </button>
+        </div>
       </Form>
 
       <Button
