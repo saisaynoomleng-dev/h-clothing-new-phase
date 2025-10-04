@@ -29,15 +29,15 @@ const ReviewComponent = ({
   return (
     <div className="space-y-3">
       <div className="flex gap-x-3 justify-end">
-        <Button onClick={handlePrev}>
+        <Button onClick={handlePrev} className="cursor-pointer">
           <ChevronLeft />
         </Button>
-        <Button onClick={handleNext}>
+        <Button onClick={handleNext} className="cursor-pointer">
           <ChevronRight />
         </Button>
       </div>
 
-      <div className="border w-full flex gap-x-4 p-5 bg-brand-blue/20">
+      <div className="border w-full flex flex-col md:flex-row gap-x-4 p-5 bg-brand-blue/20">
         <div className="relative flex-1">
           {reviews[activeReview].mainImage?.asset?.url ? (
             <Image
@@ -46,7 +46,7 @@ const ReviewComponent = ({
               width={500}
               height={500}
               priority
-              className="relative max-w-[500px] max-h-[500px]"
+              className="relative md:max-w-[500px] md:max-h-[500px]"
             />
           ) : null}
           <div className="absolute top-0 right-0 bg-brand-red p-2 w-15 h-15 flex justify-center items-center">
