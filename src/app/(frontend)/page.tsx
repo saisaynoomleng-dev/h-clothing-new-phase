@@ -248,7 +248,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <div className="space-y-3 text-center bg-brand-blue/10 py-5">
+      {/* <div className="space-y-3 text-center bg-brand-blue/10 py-5">
         <p>Follow Us</p>
 
         <h3 className="font-semibold text-fs-500">Follow Us on Instagram</h3>
@@ -282,7 +282,7 @@ export default async function Home() {
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="space-y-3 add-padding">
         <p>Testimonial</p>
